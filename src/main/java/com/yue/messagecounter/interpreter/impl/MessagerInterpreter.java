@@ -1,5 +1,6 @@
 package com.yue.messagecounter.interpreter.impl;
 
+import com.yue.messagecounter.annotaion.Interpreter;
 import com.yue.messagecounter.interpreter.MessageInterpreter;
 
 import java.io.IOException;
@@ -7,6 +8,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
+@Interpreter(
+        name = "Messager",
+        type = "Unicode"
+)
 public class MessagerInterpreter implements MessageInterpreter {
     private static MessageInterpreter interpreter;
 

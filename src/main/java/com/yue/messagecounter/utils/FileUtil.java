@@ -1,15 +1,28 @@
 package com.yue.messagecounter.utils;
 
+import com.yue.messagecounter.annotaion.Initialization;
+import com.yue.messagecounter.annotaion.Utils;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
+@Utils(
+        name = "FileUtil",
+        type = "File"
+)
 public class FileUtil {
-    private static final Map<String, FileUtil> hashtable = new Hashtable<>();
+    private static Map<String, FileUtil> hashtable;
 
     private final File file;
+
+    @Initialization(priority = 2)
+    private static void init() {
+        hashtable = new Hashtable<>();
+        System.out.println(FileUtil.class);
+    }
 
     public static FileUtil getInstance(String path)  {
         if (!(hashtable.containsKey(path))) {

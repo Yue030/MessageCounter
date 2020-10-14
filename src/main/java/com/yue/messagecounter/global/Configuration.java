@@ -1,19 +1,26 @@
 package com.yue.messagecounter.global;
 
+import com.yue.messagecounter.annotaion.Initialization;
 import com.yue.messagecounter.utils.FileUtil;
 
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
+@com.yue.messagecounter.annotaion.Configuration
 public class Configuration {
-    public static final String CONFIG_PATH = "./config.properties";
+    public static String CONFIG_PATH;
 
-    private static final Properties config = new Properties();
+    private static Properties config;
 
-    private static final FileUtil fileUtil = FileUtil.getInstance(CONFIG_PATH);
+    private static FileUtil fileUtil;
 
-    static {
+    @Initialization(priority = 1)
+    private static void init() {
+        config = new Properties();
+        CONFIG_PATH = "./config.properties";
+        fileUtil = FileUtil.getInstance(CONFIG_PATH);
+
         try {
             config.load(new FileInputStream(CONFIG_PATH));
         } catch (FileNotFoundException e) {
@@ -24,8 +31,9 @@ public class Configuration {
             JOptionPane.showMessageDialog(null, "Unknown Error");
             System.exit(0);
         }
-    }
 
+        System.out.println(Configuration.class);
+    }
     public static void createConfig() {
         try (InputStream in = Configuration.class.getClassLoader().getResourceAsStream("config.properties")) {
             fileUtil.createFile();

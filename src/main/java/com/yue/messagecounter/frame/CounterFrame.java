@@ -1,5 +1,6 @@
 package com.yue.messagecounter.frame;
 
+import com.yue.messagecounter.annotaion.Frame;
 import com.yue.messagecounter.parser.MessageParser;
 import com.yue.messagecounter.utils.*;
 
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.ResourceBundle;
 
+@Frame
 public class CounterFrame extends JFrame {
     public static final long serialVersionUID = 1L;
 

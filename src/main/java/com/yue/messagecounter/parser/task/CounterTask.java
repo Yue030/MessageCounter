@@ -1,5 +1,6 @@
 package com.yue.messagecounter.parser.task;
 
+import com.yue.messagecounter.annotaion.Task;
 import com.yue.messagecounter.utils.LangUtil;
 import com.yue.messagecounter.frame.CounterFrame;
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.concurrent.RecursiveTask;
 
+@Task
 public class CounterTask extends RecursiveTask<Integer> {
     private static final int DATA_MAX_LENGTH = 3;
     private final ResourceBundle bundle;

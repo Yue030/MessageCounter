@@ -1,7 +1,14 @@
 package com.yue.messagecounter.utils;
 
+import com.yue.messagecounter.annotaion.Utils;
+
 import java.awt.*;
 import java.io.File;
+
+@Utils(
+        name = "FileChooser",
+        type = "File"
+)
 
 public final class FileChooser {
     private FileChooser() { }

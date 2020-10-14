@@ -34,9 +34,9 @@ Message Counter For Facebook Messager
 
 作者：月Yue
 
-版本：1.0-SNAPSHOT
+版本：1.0
 
-發布日期：2020/10/14
+發布日期：2020/10/15
 
 請先下載Java
 
