@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Version: 1.0-SNAPSHOT
+Class-Path: lib/json-20200518.jar
+Main-Class: com.yue.messagecounter.CounterLauncher
+
