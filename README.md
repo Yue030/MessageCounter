@@ -97,7 +97,7 @@ MessageFilePath訊息檔路徑（可設置自動生成的訊息檔放置路徑�
 您可去github查看我們的原始碼
 
 Source Code:
-https://github.com/Yue030/Messagunter
+https://github.com/Yue030/MessageCounter
 
 下載連結:
 https://1drv.ms/u/s!AhVvkALrnG3kbnhgaeJzkpb91Fk?e=3bfLZr
