@@ -1,4 +1,12 @@
-在使用之前
+# Message Counter v2.0-SNAPSHOT
+
+### 作者：月Yue
+
+### 版本：2.0-SNAPSHOT
+
+### 發布日期：2020/10/19
+
+# 在使用之前
 
 請先依照以下指示，獲取訊息檔
 
@@ -24,35 +32,31 @@
 
 並找到個人需要查看的訊息
 
-in -> 每個聯絡人的訊息
+inbox -> 每個聯絡人的訊息
 
 記住他的位置
 
-===
-
-Message Counter For Facebook Messager
-
-作者：月Yue
-
-版本：1.0
-
-發布日期：2020/10/15
+#使用說明：
 
 請先下載Java
 
 否則將無法執行
 
-使用說明：
-
 首先會看到設定檔（config.properties）跟主程式
+
+> (若設定檔打不開，可去下載notepad++, https://notepad-plus-plus.org/downloads/
 
 設定檔內的東西皆可自己調整
 
-Lang語言（目前開放中英）
+```
+Lang 語言（目前開放中英）
 
-Order排序方式（目前開放正序及倒敘，以訊息時間為準）
+Order 排序方式（目前開放正序及倒敘，以訊息時間為準）
 
-MessageFilePath訊息檔路徑（可設置自動生成的訊息檔放置路徑）
+MessageFilePath 訊息檔路徑（可設置自動生成的訊息檔放置路徑）
+
+Mode 模式（設置模式為IG或FB)
+```
 
 確認沒有要改之後
 
@@ -64,7 +68,10 @@ MessageFilePath訊息檔路徑（可設置自動生成的訊息檔放置路徑�
 
 使用時
 
-先選擇檔案，可一次選多個
+先選擇檔案
+> FB模式可選多個
+>
+> IG則只能有一個
 
 確認無誤後，點擊計算訊息
 
@@ -78,9 +85,7 @@ MessageFilePath訊息檔路徑（可設置自動生成的訊息檔放置路徑�
 
 裡面會是已經解碼並格式後的訊息
 
-===
-
-使用時，請您放心安全性的問題
+# 使用時，請您放心安全性的問題
 
 由於只是純粹對檔案進行抓資料、解碼的動作
 
@@ -102,9 +107,7 @@ https://github.com/Yue030/MessageCounter
 下載連結:
 https://1drv.ms/u/s!AhVvkALrnG3kbnhgaeJzkpb91Fk?e=3bfLZr
 
-===
-
-若對程式有任何問題，可以聯絡以下的Email
+# 若對程式有任何問題，可以聯絡以下的Email
 
 Email: zhikuan0322@outlook.com
 
