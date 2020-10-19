@@ -1,12 +1,9 @@
-package com.yue.messagecounter.utils;
+package com.yue.messagecounter.mode.facebook.processor;
 
-import com.yue.messagecounter.annotaion.Initialization;
-import com.yue.messagecounter.annotaion.Utils;
-import com.yue.messagecounter.comparator.PositiveOrder;
-import com.yue.messagecounter.comparator.ReverseOrder;
-import com.yue.messagecounter.global.Configuration;
-import com.yue.messagecounter.interpreter.MessageInterpreter;
-import com.yue.messagecounter.interpreter.impl.MessagerInterpreter;
+import com.yue.messagecounter.global.utils.LangUtil;
+import com.yue.messagecounter.mode.AbstractJSONProcessor;
+import com.yue.messagecounter.mode.facebook.comparator.FacebookPositiveOrder;
+import com.yue.messagecounter.mode.facebook.comparator.FacebookReverseOrder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,28 +12,27 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Utils(type = "Json")
-public class JsonUtil {
-    private JsonUtil() {}
+public class MessengerProcessor extends AbstractJSONProcessor {
+    private static final Map<File[], MessengerProcessor> flyweight = new Hashtable<>();
 
-    private static Properties config;
-    private static FileUtil fileUtil;
-
-    private static MessageInterpreter interpreter;
-
-    @Initialization
-    private static void init() {
-        config = Configuration.getConfig();
-        fileUtil = FileUtil.getInstance(config.getProperty("MessageFilePath"));
-        interpreter = MessagerInterpreter.getInstance();
-        System.out.println(JsonUtil.class);
+    public static MessengerProcessor getInstance(File[] files) {
+        if (!(flyweight.containsKey(files))) {
+            flyweight.put(files, new MessengerProcessor(files));
+        }
+        return flyweight.get(files);
     }
 
-    public static void getJson(File[] files) {
+    private MessengerProcessor(File[] files) {
+        super(files);
+    }
+
+    @Override
+    public void process() {
         StringBuilder builder = new StringBuilder();
         LinkedList<String> stringList = new LinkedList<>();
         Map<String, Integer> members = new HashMap<>();
         AtomicInteger msgAmount = new AtomicInteger();
+
         List<JSONObject> jsonObjects = new ArrayList<>();
 
         for (File file : files) {
@@ -52,20 +48,20 @@ public class JsonUtil {
 
                 msgAmount.addAndGet(items.length());
 
-                for (int i = 0; i < member.length(); i++) {
-                    String name = member.getJSONObject(i).getString("name");
+                member.forEach(obj -> {
+                    String name = ((JSONObject) obj).getString("name");
                     members.put(name, members.get(name));
-                }
+                });
 
-                for (int i = 0; i < items.length(); i++) {
-                    JSONObject jsonObject1 = items.getJSONObject(i);
+                items.forEach(obj -> {
+                    JSONObject jsonObject1 = (JSONObject) obj;
                     String sender = jsonObject1.getString("sender_name");
 
-                    int amount = Optional.ofNullable((members.get(sender))).orElse(0);
+                    int amount = Optional.ofNullable(members.get(sender)).orElse(0);
                     members.put(sender, ++amount);
 
                     jsonObjects.add(jsonObject1);
-                }
+                });
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -76,13 +72,13 @@ public class JsonUtil {
         String setting = config.getProperty("Order");
 
         if (setting.equals("-1"))
-            comparator = new ReverseOrder();
+            comparator = new FacebookReverseOrder();
         else
-            comparator = new PositiveOrder();
+            comparator = new FacebookPositiveOrder();
 
         jsonObjects.stream()
                 .sorted(comparator)
-                .forEach((obj)-> {
+                .forEach(obj -> {
                     Date date = new Date(obj.getLong("timestamp_ms"));
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     String sender = obj.getString("sender_name");
@@ -94,10 +90,11 @@ public class JsonUtil {
                     stringList.add(interpreter.decode(dateFormat.format(date) + "\t" + sender + " -> " + content));
         });
 
-        stringList.addFirst("\n");
+        stringList.addFirst("====================\n");
 
         members.forEach((k, v) -> stringList.addFirst(interpreter.decode(k) + ": " + v));
 
+        stringList.addFirst("====================");
         stringList.addFirst(LangUtil.getInstance().getBundle().getString("log.total") + msgAmount);
 
         try {

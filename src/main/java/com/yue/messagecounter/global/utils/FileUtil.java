@@ -1,4 +1,4 @@
-package com.yue.messagecounter.utils;
+package com.yue.messagecounter.global.utils;
 
 import com.yue.messagecounter.annotaion.Initialization;
 import com.yue.messagecounter.annotaion.Utils;
@@ -14,21 +14,15 @@ import java.util.Map;
         type = "File"
 )
 public class FileUtil {
-    private static Map<String, FileUtil> hashtable;
+    private static Map<String, FileUtil> flyweight = new Hashtable<>();;
 
     private final File file;
 
-    @Initialization(priority = 2)
-    private static void init() {
-        hashtable = new Hashtable<>();
-        System.out.println(FileUtil.class);
-    }
-
     public static FileUtil getInstance(String path)  {
-        if (!(hashtable.containsKey(path))) {
-            hashtable.put(path, new FileUtil(path));
+        if (!(flyweight.containsKey(path))) {
+            flyweight.put(path, new FileUtil(path));
         }
-        return hashtable.get(path);
+        return flyweight.get(path);
     }
 
     private FileUtil(String path) {

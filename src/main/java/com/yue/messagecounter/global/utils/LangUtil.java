@@ -1,4 +1,4 @@
-package com.yue.messagecounter.utils;
+package com.yue.messagecounter.global.utils;
 
 import com.yue.messagecounter.annotaion.Initialization;
 import com.yue.messagecounter.annotaion.Utils;
@@ -20,12 +20,11 @@ public class LangUtil {
 
     private Locale locale;
 
-    @Initialization
+    @Initialization(priority = 1)
     private static void init() {
         LOCALE_TW = new Locale("zh", "TW");
         LOCALE_US = new Locale("en", "US");
         config = Configuration.getConfig();
-        System.out.println(LangUtil.class);
     }
 
     private LangUtil() {

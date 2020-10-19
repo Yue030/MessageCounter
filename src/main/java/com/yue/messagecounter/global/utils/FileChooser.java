@@ -1,4 +1,4 @@
-package com.yue.messagecounter.utils;
+package com.yue.messagecounter.global.utils;
 
 import com.yue.messagecounter.annotaion.Utils;
 
@@ -13,7 +13,17 @@ import java.io.File;
 public final class FileChooser {
     private FileChooser() { }
 
-    public static File[] chooseFile() {
+    public static String chooseFile() {
+        FileDialog dialog = new FileDialog((Frame)null, LangUtil.getInstance().getBundle().getString("fileChoose.title"), FileDialog.LOAD);
+
+        dialog.setFilenameFilter((file, name) -> name.endsWith(".json"));
+        dialog.setMultipleMode(true);
+        dialog.setVisible(true);
+
+        return dialog.getDirectory() + dialog.getFile();
+    }
+
+    public static File[] chooseFiles() {
         FileDialog dialog = new FileDialog((Frame)null, LangUtil.getInstance().getBundle().getString("fileChoose.title"), FileDialog.LOAD);
 
         dialog.setFilenameFilter((file, name) -> name.endsWith(".json"));

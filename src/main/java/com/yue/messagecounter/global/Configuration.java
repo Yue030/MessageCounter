@@ -1,7 +1,7 @@
 package com.yue.messagecounter.global;
 
 import com.yue.messagecounter.annotaion.Initialization;
-import com.yue.messagecounter.utils.FileUtil;
+import com.yue.messagecounter.global.utils.FileUtil;
 
 import javax.swing.*;
 import java.io.*;
@@ -15,7 +15,7 @@ public class Configuration {
 
     private static FileUtil fileUtil;
 
-    @Initialization(priority = 1)
+    @Initialization(priority = 3)
     private static void init() {
         config = new Properties();
         CONFIG_PATH = "./config.properties";
@@ -31,8 +31,6 @@ public class Configuration {
             JOptionPane.showMessageDialog(null, "Unknown Error");
             System.exit(0);
         }
-
-        System.out.println(Configuration.class);
     }
     public static void createConfig() {
         try (InputStream in = Configuration.class.getClassLoader().getResourceAsStream("config.properties")) {

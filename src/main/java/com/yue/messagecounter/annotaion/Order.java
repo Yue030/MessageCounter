@@ -8,5 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Order {
-    String value() default "timestamp_ms";
+    String facebook() default "timestamp_ms";
+
+    String instagram() default "created_at";
 }
