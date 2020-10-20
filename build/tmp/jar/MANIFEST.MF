@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Version: 1.0
+Implementation-Version: 2.0-SNAPSHOT
 Class-Path: lib/json-20200518.jar lib/reflections-0.9.11.jar lib/guava
  -20.0.jar lib/javassist-3.21.0-GA.jar
 Main-Class: com.yue.messagecounter.CounterLauncher
